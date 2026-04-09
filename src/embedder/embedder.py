@@ -5,8 +5,6 @@ Wraps LangChain's HuggingFaceEmbeddings (sentence-transformers).
 Provides a single interface for encoding text.
 """
 
-from typing import List
-
 from langchain_huggingface import HuggingFaceEmbeddings
 
 import config
@@ -65,7 +63,7 @@ class EmbeddingModel:
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
-    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+    def embed_texts(self, texts: list[str]) -> list[list[float]]:
         """
         Embed a list of strings.
 
@@ -77,7 +75,7 @@ class EmbeddingModel:
         """
         return self.model.embed_documents(texts)
 
-    def embed_query(self, query: str) -> List[float]:
+    def embed_query(self, query: str) -> list[float]:
         """
         Embed a single query string.
 

@@ -6,8 +6,6 @@ Takes initial vector-search candidates and re-scores them
 for higher precision before returning final results.
 """
 
-from typing import List
-
 from langchain_core.documents import Document
 from sentence_transformers.cross_encoder import CrossEncoder
 
@@ -49,9 +47,9 @@ class Reranker:
     def rerank(
         self,
         query: str,
-        documents: List[Document],
+        documents: list[Document],
         top_k: int = config.FINAL_K,
-    ) -> List[Document]:
+    ) -> list[Document]:
         """
         Re-rank documents by relevance to the query.
 
@@ -69,7 +67,7 @@ class Reranker:
             return []
 
         pairs = [(query, doc.page_content) for doc in documents]
-        scores: List[float] = self.model.predict(pairs).tolist()
+        scores: list[float] = self.model.predict(pairs).tolist()
 
         for doc, score in zip(documents, scores):
             doc.metadata["rerank_score"] = round(float(score), 6)

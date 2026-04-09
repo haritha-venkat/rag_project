@@ -5,8 +5,6 @@ Persistent ChromaDB vector store via LangChain's Chroma wrapper.
 Handles upsert, search, deletion, and DB introspection.
 """
 
-from typing import List, Tuple
-
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
@@ -61,7 +59,7 @@ class VectorStore:
 
     # ── Indexing ───────────────────────────────────────────────────────────────
 
-    def add_documents(self, documents: List[Document]) -> int:
+    def add_documents(self, documents: list[Document]) -> int:
         """
         Add documents to the vector store.
         Generates IDs from source + chunk_index to prevent duplicates.
@@ -87,7 +85,7 @@ class VectorStore:
         self,
         query: str,
         k: int = config.INITIAL_K,
-    ) -> List[Document]:
+    ) -> list[Document]:
         """
         Cosine similarity search — returns top-k matching documents.
 
@@ -114,7 +112,7 @@ class VectorStore:
         self,
         query: str,
         k: int = config.INITIAL_K,
-    ) -> List[Tuple[Document, float]]:
+    ) -> list[tuple[Document, float]]:
         """
         Cosine search returning (Document, score) tuples.
 

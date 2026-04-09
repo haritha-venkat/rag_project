@@ -5,16 +5,15 @@ Q&A engine: retrieves relevant chunks and saves every
 question + answer to a dated JSON file.
 """
 
-import json
 import datetime
+import json
 from pathlib import Path
-from typing import List
 
 from langchain_core.documents import Document
 
 import config
-from src.retriever.retriever import Retriever
 from src.logger.log_setup import LoggerFactory
+from src.retriever.retriever import Retriever
 
 logger = LoggerFactory.get_logger(__name__)
 
@@ -40,7 +39,7 @@ class QAEngine:
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
-    def ask(self, query: str, verbose: bool = True) -> List[Document]:
+    def ask(self, query: str, verbose: bool = True) -> list[Document]:
         """
         Ask a question and retrieve relevant document chunks.
 
@@ -67,7 +66,7 @@ class QAEngine:
 
         return results
 
-    def load_history(self) -> List[dict]:
+    def load_history(self) -> list[dict]:
         """
         Load today's Q&A history from JSON.
 
@@ -107,7 +106,7 @@ class QAEngine:
 
     # ── Internal helpers ───────────────────────────────────────────────────────
 
-    def _save_to_history(self, query: str, results: List[Document]) -> None:
+    def _save_to_history(self, query: str, results: list[Document]) -> None:
         """Append a Q&A record to today's JSON history file."""
         record = {
             "timestamp": datetime.datetime.now().isoformat(),
@@ -138,7 +137,7 @@ class QAEngine:
         )
 
     @staticmethod
-    def _print_results(query: str, results: List[Document]) -> None:
+    def _print_results(query: str, results: list[Document]) -> None:
         """Pretty-print retrieval results."""
         sep = "=" * 65
         print(f"\n{sep}")

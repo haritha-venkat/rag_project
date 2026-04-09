@@ -2,13 +2,13 @@ import argparse
 import sys
 
 import config  # noqa: F401 — ensures dirs are created on import
-from src.logger.log_setup import LoggerFactory
-from src.loader.document_loader import DocumentLoader
 from src.chunker.text_chunker import TextChunker
-from src.vectorstore.chroma_store import VectorStore
+from src.loader.document_loader import DocumentLoader
+from src.logger.log_setup import LoggerFactory
+from src.qa.qa_engine import QAEngine
 from src.reranker.reranker import Reranker
 from src.retriever.retriever import Retriever
-from src.qa.qa_engine import QAEngine
+from src.vectorstore.chroma_store import VectorStore
 
 logger = LoggerFactory.get_logger(__name__)
 

@@ -11,14 +11,9 @@ Supported formats:
 """
 
 from pathlib import Path
-from typing import List
 
+from langchain_community.document_loaders import CSVLoader, Docx2txtLoader, TextLoader
 from langchain_core.documents import Document
-from langchain_community.document_loaders import (
-    CSVLoader,
-    TextLoader,
-    Docx2txtLoader,
-)
 
 import config
 from src.logger.log_setup import LoggerFactory
@@ -39,7 +34,7 @@ class DocumentLoader:
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
-    def load(self, file_path: str) -> List[Document]:
+    def load(self, file_path: str) -> list[Document]:
         """
         Load a single file and return a list of LangChain Documents.
 
@@ -70,7 +65,7 @@ class DocumentLoader:
         logger.info("Loaded %d document(s) from '%s'", len(docs), path.name)
         return docs
 
-    def load_many(self, file_paths: List[str]) -> List[Document]:
+    def load_many(self, file_paths: list[str]) -> list[Document]:
         """
         Load multiple files and combine all documents.
 
@@ -80,7 +75,7 @@ class DocumentLoader:
         Returns:
             List[Document]: Combined documents from all files.
         """
-        all_docs: List[Document] = []
+        all_docs: list[Document] = []
         for fp in file_paths:
             try:
                 all_docs.extend(self.load(fp))
@@ -91,7 +86,7 @@ class DocumentLoader:
 
     # ── Private loaders ────────────────────────────────────────────────────────
 
-    def _load_pdf(self, path: Path) -> List[Document]:
+    def _load_pdf(self, path: Path) -> list[Document]:
         """Use Marker to convert PDF → markdown, then wrap as Documents."""
         try:
             from marker.converters.pdf import PdfConverter
@@ -120,7 +115,7 @@ class DocumentLoader:
                 )
         return docs
 
-    def _load_csv(self, path: Path) -> List[Document]:
+    def _load_csv(self, path: Path) -> list[Document]:
         """Load CSV rows as individual documents."""
         loader = CSVLoader(file_path=str(path))
         docs = loader.load()
@@ -128,7 +123,7 @@ class DocumentLoader:
             doc.metadata["file_type"] = "csv"
         return docs
 
-    def _load_txt(self, path: Path) -> List[Document]:
+    def _load_txt(self, path: Path) -> list[Document]:
         """Load plain text file, auto-detecting encoding (utf-8, utf-16, latin-1)."""
         for encoding in ("utf-8-sig", "utf-16", "latin-1"):
             try:
@@ -147,7 +142,7 @@ class DocumentLoader:
             "bottom-right corner → click encoding → Save with Encoding → UTF-8"
         )
 
-    def _load_docx(self, path: Path) -> List[Document]:
+    def _load_docx(self, path: Path) -> list[Document]:
         """Load DOCX file as a single document."""
         loader = Docx2txtLoader(file_path=str(path))
         docs = loader.load()

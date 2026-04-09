@@ -5,8 +5,6 @@ Splits LangChain Documents into smaller overlapping chunks
 using LangChain's RecursiveCharacterTextSplitter.
 """
 
-from typing import List
-
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -52,7 +50,7 @@ class TextChunker:
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
-    def split(self, documents: List[Document]) -> List[Document]:
+    def split(self, documents: list[Document]) -> list[Document]:
         """
         Split a list of Documents into smaller chunks.
 
@@ -75,7 +73,7 @@ class TextChunker:
     # ── Internal helpers ───────────────────────────────────────────────────────
 
     @staticmethod
-    def _add_chunk_indices(chunks: List[Document]) -> None:
+    def _add_chunk_indices(chunks: list[Document]) -> None:
         """
         Group chunks by source and add a sequential chunk_index per source.
         Mutates the list in-place.

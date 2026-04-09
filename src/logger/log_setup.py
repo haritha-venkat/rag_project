@@ -5,9 +5,8 @@ Centralised logging setup.
 Call LoggerFactory.get_logger(__name__) in every module.
 """
 
-import logging
 import datetime
-from pathlib import Path
+import logging
 
 import config
 

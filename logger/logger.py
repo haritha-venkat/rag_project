@@ -1,8 +1,8 @@
-import logging
 import datetime
+import logging
 from pathlib import Path
 
-from config import LOG_DIR, LOG_LEVEL, LOG_FORMAT, LOG_DATE_FORMAT
+from config import LOG_DATE_FORMAT, LOG_DIR, LOG_FORMAT, LOG_LEVEL
 
 _LOG_FILE: Path = LOG_DIR / f"rag_{datetime.date.today()}.log"
 _CONFIGURED: bool = False

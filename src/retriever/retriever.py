@@ -6,14 +6,12 @@ Orchestrates retrieval:
   2. Candidates → CrossEncoder re-ranker (final_k results)
 """
 
-from typing import List
-
 from langchain_core.documents import Document
 
 import config
-from src.vectorstore.chroma_store import VectorStore
-from src.reranker.reranker import Reranker
 from src.logger.log_setup import LoggerFactory
+from src.reranker.reranker import Reranker
+from src.vectorstore.chroma_store import VectorStore
 
 logger = LoggerFactory.get_logger(__name__)
 
@@ -46,7 +44,7 @@ class Retriever:
 
     # ── Public API ─────────────────────────────────────────────────────────────
 
-    def retrieve(self, query: str) -> List[Document]:
+    def retrieve(self, query: str) -> list[Document]:
         """
         Retrieve the most relevant documents for a query.
 
