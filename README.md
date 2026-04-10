@@ -1,4 +1,4 @@
-# RAG Pipeline — ML Team Task
+# RAG Pipeline
 
 > **Stack:** LangChain · Marker (PDF) · ChromaDB · SentenceTransformers · CrossEncoder
 
